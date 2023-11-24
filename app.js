@@ -23,9 +23,7 @@ io.on('connection',(socket)=>{
         socket.to('room'+randomchat).emit('recievemsg',data);
     })
     socket.on('joinrandomchat',()=>{
-        
         socket.join('room'+randomchat);
-        
     });
     socket.on('joingroup',(data)=>{
         socket.join(data);
