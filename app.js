@@ -10,15 +10,13 @@ app.use(express.static('public'));
 app.get('/',(req,res)=>{
     res.render('index.ejs')
 })
+
 users ={}
 let randomchat=0;
-
 io.on('connection',(socket)=>{
     socket.on('connectToUser',(data)=>{
         console.log("event recieved");
-        // socket
         socket.join(Math.min(data.user1,data.user2)+Math.max(data.user1,data.user2));
-        
     })
     socket.on('sendmsg',(data)=>{
         console.log(data);
@@ -37,9 +35,6 @@ io.on('connection',(socket)=>{
     console.log(data.groupname)
     socket.to(data.groupname).emit('recievemsg',data)
    });
-   
-   
-   
 })
 app.post('/',(req,res)=>{
     users[req.body.useremail]= {}
